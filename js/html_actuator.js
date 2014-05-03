@@ -4,6 +4,7 @@ function HTMLActuator() {
   this.bestContainer    = document.querySelector(".best-container");
   this.messageContainer = document.querySelector(".game-message");
   this.sharingContainer = document.querySelector(".score-sharing");
+  this.undoContainer    = document.querySelector(".undo-button");
 
   this.score = 0;
 }
@@ -24,6 +25,7 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
 
     self.updateScore(metadata.score);
     self.updateBestScore(metadata.bestScore);
+    self.updateUndo(metadata.undoCount);
 
     if (metadata.terminated) {
       if (metadata.over) {
@@ -127,6 +129,10 @@ HTMLActuator.prototype.updateScore = function (score) {
 
 HTMLActuator.prototype.updateBestScore = function (bestScore) {
   this.bestContainer.textContent = bestScore;
+};
+
+HTMLActuator.prototype.updateUndo = function (undoCount) {
+  this.undoContainer.textContent = "Отменить ход (" + undoCount + ")";
 };
 
 HTMLActuator.prototype.message = function (won) {

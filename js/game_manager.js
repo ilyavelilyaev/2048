@@ -6,6 +6,8 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
 
   this.startTiles     = 2;
 
+  this.undoCount      = 2;
+
   this.inputManager.on("move", this.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
@@ -19,6 +21,7 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
 // Restart the game
 GameManager.prototype.restart = function () {
   this.storageManager.clearGameState();
+  this.undoCount      = 2;
   this.actuator.continueGame(); // Clear the game won/lost message
   this.setup();
 };
@@ -35,6 +38,8 @@ GameManager.prototype.save = function () {
 };
 
 GameManager.prototype.undo = function () {
+  if (this.undoCount > 0) {
+    this.undoCount = this.undoCount - 1;
    var previousState = this.storageManager.getPrevState();
 
   // Reload the game from a previous game if present
@@ -58,7 +63,7 @@ GameManager.prototype.undo = function () {
 
   // Update the actuator
   this.actuate();
-
+};
 };
 
 
@@ -164,7 +169,8 @@ GameManager.prototype.actuate = function () {
     over:       this.over,
     won:        this.won,
     bestScore:  this.storageManager.getBestScore(),
-    terminated: this.isGameTerminated()
+    terminated: this.isGameTerminated(),
+    undoCount:  this.undoCount 
   });
 
 };
