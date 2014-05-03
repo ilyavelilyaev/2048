@@ -49,7 +49,7 @@ GameManager.prototype.setup = function () {
     this.keepPlaying = previousState.keepPlaying;
   } else {
     this.grid        = new Grid(this.size);
-    this.score       = 0;
+    this.score       = 21000;
     this.over        = false;
     this.won         = false;
     this.keepPlaying = false;
@@ -64,6 +64,10 @@ GameManager.prototype.setup = function () {
 
 // Set up the initial tiles to start the game with
 GameManager.prototype.addStartTiles = function () {
+  var value = 2048;
+  var tile = new Tile(this.grid.randomAvailableCell(), value);
+  this.grid.insertTile(tile);
+
   for (var i = 0; i < this.startTiles; i++) {
     this.addRandomTile();
   }
