@@ -579,7 +579,20 @@ hr {
   text-align: center;
   float: right; }
 
-.save-load-button {
+.save-button {
+  display: inline-block;
+  background: #8f7a66;
+  border-radius: 5px;
+  padding: 0 20px;
+  text-decoration: none;
+  color: #f9f6f2;
+  height: 40px;
+  line-height: 42px;
+  cursor: pointer;
+  display: block;
+  text-align: center;
+  float: right; }
+.load-button {
   display: inline-block;
   background: #8f7a66;
   border-radius: 3px;
@@ -640,7 +653,13 @@ hr {
     box-sizing: border-box;
     margin-top: 2px; }
 
-  .save-load-button {
+  .save-button {
+    width: 42%;
+    padding: 0;
+    display: block;
+    box-sizing: border-box;
+    margin-top: 2px; }
+  .load-button {
     width: 42%;
     padding: 0;
     display: block;

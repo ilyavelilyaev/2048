@@ -10,7 +10,7 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
   this.inputManager.on("restart", this.restart.bind(this));
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
   this.inputManager.on("save", this.save.bind(this));
-  this.inputManager.on("load", this.save.bind(this));
+  this.inputManager.on("load", this.load.bind(this));
 
   this.setup();
 }
@@ -34,7 +34,7 @@ GameManager.prototype.save = function () {
 };
 
 GameManager.prototype.load = function () {
-  var previousState = this.storageManager.loadGameState();
+ var previousState = this.storageManager.loadGameState();
 
   // Reload the game from a previous game if present
   if (previousState) {
@@ -57,6 +57,7 @@ GameManager.prototype.load = function () {
 
   // Update the actuator
   this.actuate();
+
 };
 
 // Return true if the game is lost, or has won and the user hasn't kept playing
