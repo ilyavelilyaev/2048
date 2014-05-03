@@ -22,6 +22,7 @@ function LocalStorageManager() {
   this.bestScoreKey     = "bestScore";
   this.gameStateKey     = "gameState";
   this.saveStateKey     = "saveState";
+  this.prevStateKey     = "prevState";
 
   var supported = this.localStorageSupported();
   this.storage = supported ? window.localStorage : window.fakeStorage;
@@ -73,4 +74,12 @@ LocalStorageManager.prototype.loadGameState = function () {
 LocalStorageManager.prototype.saveGameState = function (saveState) {
   this.storage.setItem(this.saveStateKey, JSON.stringify(saveState));
 };
+//undo feature
+LocalStorageManager.prototype.getPrevState = function () {
+  var stateJSON = this.storage.getItem(this.prevStateKey);
+  return stateJSON ? JSON.parse(stateJSON) : null;
+};
 
+LocalStorageManager.prototype.setPrevState = function (prevState) {
+  this.storage.setItem(this.prevStateKey, JSON.stringify(prevState));
+};

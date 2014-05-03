@@ -11,6 +11,7 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
   this.inputManager.on("save", this.save.bind(this));
   this.inputManager.on("load", this.load.bind(this));
+  this.inputManager.on("undo", this.undo.bind(this));
 
   this.setup();
 }
@@ -32,6 +33,34 @@ GameManager.prototype.keepPlaying = function () {
 GameManager.prototype.save = function () {
   this.storageManager.saveGameState(this.serialize());
 };
+
+GameManager.prototype.undo = function () {
+   var previousState = this.storageManager.getPrevState();
+
+  // Reload the game from a previous game if present
+  if (previousState) {
+    this.grid        = new Grid(previousState.grid.size,
+                                previousState.grid.cells); // Reload grid
+    this.score       = previousState.score;
+    this.over        = previousState.over;
+    this.won         = previousState.won;
+    this.keepPlaying = previousState.keepPlaying;
+  } else {
+    this.grid        = new Grid(this.size);
+    this.score       = 20480;
+    this.over        = false;
+    this.won         = false;
+    this.keepPlaying = false;
+
+    // Add the initial tiles
+    this.addStartTiles();
+  }
+
+  // Update the actuator
+  this.actuate();
+
+};
+
 
 GameManager.prototype.load = function () {
  var previousState = this.storageManager.loadGameState();
@@ -171,6 +200,7 @@ GameManager.prototype.moveTile = function (tile, cell) {
 // Move tiles on the grid in the specified direction
 GameManager.prototype.move = function (direction) {
   // 0: up, 1: right, 2: down, 3: left
+  this.storageManager.setPrevState(this.serialize());
   var self = this;
 
   if (this.isGameTerminated()) return; // Don't do anything if the game's over
