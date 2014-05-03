@@ -39,9 +39,12 @@ GameManager.prototype.save = function () {
 
 GameManager.prototype.undo = function () {
   if (this.undoCount > 0) {
-    this.undoCount = this.undoCount - 1;
-   var previousState = this.storageManager.getPrevState();
 
+    
+   var previousState = this.storageManager.getPrevState();
+    
+      this.undoCount = this.undoCount - 1;
+  
   // Reload the game from a previous game if present
   if (previousState) {
     this.grid        = new Grid(previousState.grid.size,
@@ -206,7 +209,7 @@ GameManager.prototype.moveTile = function (tile, cell) {
 // Move tiles on the grid in the specified direction
 GameManager.prototype.move = function (direction) {
   // 0: up, 1: right, 2: down, 3: left
-  this.storageManager.setPrevState(this.serialize());
+  var prevState = this.serialize();
   var self = this;
 
   if (this.isGameTerminated()) return; // Don't do anything if the game's over
@@ -258,6 +261,7 @@ GameManager.prototype.move = function (direction) {
   });
 
   if (moved) {
+    this.storageManager.setPrevState(prevState);
     this.addRandomTile();
 
     if (!this.movesAvailable()) {
