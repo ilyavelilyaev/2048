@@ -6,6 +6,7 @@ function HTMLActuator() {
   this.sharingContainer = document.querySelector(".score-sharing");
   this.undoContainer    = document.querySelector(".undo-button");
   this.titleContainer   = document.querySelector(".title");
+  this.movesContainer   = document.querySelector(".moves-container");
   this.score = 0;
 }
 
@@ -27,6 +28,7 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
     self.updateBestScore(metadata.bestScore);
     self.updateUndo(metadata.undoCount);
     self.updateTitle(metadata.nextGoal);
+    self.updateMoves(metadata.moves);
     
     if (metadata.terminated) {
       if (metadata.over) {
@@ -130,6 +132,10 @@ HTMLActuator.prototype.updateScore = function (score) {
 
 HTMLActuator.prototype.updateBestScore = function (bestScore) {
   this.bestContainer.textContent = bestScore;
+};
+
+HTMLActuator.prototype.updateMoves = function (moves) {
+  this.movesContainer.textContent = moves;
 };
 
 HTMLActuator.prototype.updateTitle= function (nextGoal) {

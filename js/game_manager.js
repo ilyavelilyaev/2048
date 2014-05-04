@@ -31,6 +31,7 @@ GameManager.prototype.restart = function () {
   this.canUndo        = false;
   this.actuator.continueGame(); // Clear the game won/lost message
   this.setup();
+  
 };
 
 GameManager.prototype.reset = function () {
@@ -41,6 +42,7 @@ GameManager.prototype.reset = function () {
   this.undoCount      = 2;
   this.actuator.continueGame(); // Clear the game won/lost message
   this.setup();
+  
 };
 // Keep playing after winning (allows going over 2048)
 GameManager.prototype.keepPlaying = function () {
@@ -138,6 +140,7 @@ GameManager.prototype.setup = function () {
     if (this.maxTile > 2) {
     this.score       = this.maxTile*(Math.log(this.maxTile)/Math.log(2)-1);
   } else this.score = 0;
+    this.moves          = 0;
     this.over        = false;
     this.won         = false;
     this.keepPlaying = false;
@@ -192,7 +195,8 @@ GameManager.prototype.actuate = function () {
     bestScore:  this.storageManager.getBestScore(),
     terminated: this.isGameTerminated(),
     undoCount:  this.undoCount,
-    nextGoal:   this.maxTile*2
+    nextGoal:   this.maxTile*2,
+    moves:      this.moves
   });
 
 };
@@ -288,6 +292,7 @@ GameManager.prototype.move = function (direction) {
     this.storageManager.setPrevState(prevState);
     this.addRandomTile();
     this.canUndo        = true;
+    self.moves += 1;
 
     if (!this.movesAvailable()) {
       this.over = true; // Game over!
