@@ -3,16 +3,16 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
   this.inputManager   = new InputManager;
   this.storageManager = new StorageManager;
   this.actuator       = new Actuator;
-
+  this.canUndo        = true;
   this.startTiles     = 2;
-
+  this.maxTile        = this.storageManager.getMaxTile();
   this.undoCount      = 2;
-
+  
   this.inputManager.on("move", this.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
-  this.inputManager.on("save", this.save.bind(this));
-  this.inputManager.on("load", this.load.bind(this));
+  this.inputManager.on("reset", this.reset.bind(this));
+  //this.inputManager.on("load", this.load.bind(this));
   this.inputManager.on("undo", this.undo.bind(this));
 
   this.setup();
@@ -20,12 +20,23 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
 
 // Restart the game
 GameManager.prototype.restart = function () {
+  this.canUndo        = false;
+  this.maxTile        = this.storageManager.getMaxTile();
   this.storageManager.clearGameState();
   this.undoCount      = 2;
   this.actuator.continueGame(); // Clear the game won/lost message
   this.setup();
 };
 
+GameManager.prototype.reset = function () {
+  this.storageManager.setMaxTile(2);
+  this.canUndo        = false;
+  this.maxTile        = this.storageManager.getMaxTile();
+  this.storageManager.clearGameState();
+  this.undoCount      = 2;
+  this.actuator.continueGame(); // Clear the game won/lost message
+  this.setup();
+};
 // Keep playing after winning (allows going over 2048)
 GameManager.prototype.keepPlaying = function () {
   this.keepPlaying = true;
@@ -33,43 +44,38 @@ GameManager.prototype.keepPlaying = function () {
 };
 
 //save/load game
+/*
 GameManager.prototype.save = function () {
   this.storageManager.saveGameState(this.serialize());
 };
-
+*/
 GameManager.prototype.undo = function () {
   if (this.undoCount > 0) {
+    if (this.canUndo) {
+    this.canUndo        = false;
 
-    
+    this.actuator.clearMessage();
    var previousState = this.storageManager.getPrevState();
     
       this.undoCount = this.undoCount - 1;
   
   // Reload the game from a previous game if present
-  if (previousState) {
+  
     this.grid        = new Grid(previousState.grid.size,
                                 previousState.grid.cells); // Reload grid
     this.score       = previousState.score;
     this.over        = previousState.over;
     this.won         = previousState.won;
     this.keepPlaying = previousState.keepPlaying;
-  } else {
-    this.grid        = new Grid(this.size);
-    this.score       = 20480;
-    this.over        = false;
-    this.won         = false;
-    this.keepPlaying = false;
-
-    // Add the initial tiles
-    this.addStartTiles();
-  }
-
+  
+  this.score -= 2500;
   // Update the actuator
   this.actuate();
 };
 };
+};
 
-
+/*
 GameManager.prototype.load = function () {
  var previousState = this.storageManager.loadGameState();
 
@@ -96,7 +102,7 @@ GameManager.prototype.load = function () {
   this.actuate();
 
 };
-
+*/
 // Return true if the game is lost, or has won and the user hasn't kept playing
 GameManager.prototype.isGameTerminated = function () {
   if (this.over || (this.won && !this.keepPlaying)) {
@@ -120,7 +126,9 @@ GameManager.prototype.setup = function () {
     this.keepPlaying = previousState.keepPlaying;
   } else {
     this.grid        = new Grid(this.size);
-    this.score       = 20480;
+    if (this.maxTile > 2) {
+    this.score       = this.maxTile*(Math.log(this.maxTile)/Math.log(2)-1);
+  } else this.score = 0;
     this.over        = false;
     this.won         = false;
     this.keepPlaying = false;
@@ -135,10 +143,11 @@ GameManager.prototype.setup = function () {
 
 // Set up the initial tiles to start the game with
 GameManager.prototype.addStartTiles = function () {
-  var value = 2048;
+  if (this.maxTile > 2) {
+  var value = + this.maxTile;
   var tile = new Tile(this.grid.randomAvailableCell(), value);
   this.grid.insertTile(tile);
-
+};
   for (var i = 0; i < this.startTiles; i++) {
     this.addRandomTile();
   }
@@ -159,7 +168,7 @@ GameManager.prototype.actuate = function () {
   if (this.storageManager.getBestScore() < this.score) {
     this.storageManager.setBestScore(this.score);
   }
-
+  this.storageManager.setMaxTile(this.maxTile);
   // Clear the state when the game is over (game over only, not win)
   if (this.over) {
     this.storageManager.clearGameState();
@@ -246,7 +255,12 @@ GameManager.prototype.move = function (direction) {
 
           // Update the score
           self.score += merged.value;
-
+          var m = + self.maxTile
+          if(!m) m = 0;
+          if (merged.value > m){
+            self.maxTile = merged.value;
+            
+          };
           // The mighty 8192 tile
           if (merged.value === 8192) self.won = true;
         } else {
@@ -263,6 +277,7 @@ GameManager.prototype.move = function (direction) {
   if (moved) {
     this.storageManager.setPrevState(prevState);
     this.addRandomTile();
+    this.canUndo        = true;
 
     if (!this.movesAvailable()) {
       this.over = true; // Game over!

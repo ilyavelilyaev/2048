@@ -75,8 +75,8 @@ KeyboardInputManager.prototype.listen = function () {
   this.bindButtonPress(".retry-button", this.restart);
   this.bindButtonPress(".restart-button", this.restart);
   this.bindButtonPress(".keep-playing-button", this.keepPlaying);
-  this.bindButtonPress(".save-button", this.save);
-  this.bindButtonPress(".load-button", this.load);
+  this.bindButtonPress(".reset-button", this.reset);
+  //this.bindButtonPress(".load-button", this.load);*/
   this.bindButtonPress(".undo-button", this.undo);
   // Respond to swipe events
   var touchStartClientX, touchStartClientY;
@@ -143,14 +143,17 @@ KeyboardInputManager.prototype.keepPlaying = function (event) {
   event.preventDefault();
   this.emit("keepPlaying");
 };
-KeyboardInputManager.prototype.save = function (event) {
+
+KeyboardInputManager.prototype.reset = function (event) {
   event.preventDefault();
-  this.emit("save");
-};
+  this.emit("reset");
+}
+/*
 KeyboardInputManager.prototype.load = function (event) {
   event.preventDefault();
   this.emit("load");
 };
+*/
 KeyboardInputManager.prototype.undo = function (event) {
   event.preventDefault();
   this.emit("undo");

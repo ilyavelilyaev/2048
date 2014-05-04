@@ -23,7 +23,7 @@ function LocalStorageManager() {
   this.gameStateKey     = "gameState";
   this.saveStateKey     = "saveState";
   this.prevStateKey     = "prevState";
-
+  this.maxTileKey       = "maxTile";
   var supported = this.localStorageSupported();
   this.storage = supported ? window.localStorage : window.fakeStorage;
 }
@@ -82,4 +82,10 @@ LocalStorageManager.prototype.getPrevState = function () {
 
 LocalStorageManager.prototype.setPrevState = function (prevState) {
   this.storage.setItem(this.prevStateKey, JSON.stringify(prevState));
+};
+LocalStorageManager.prototype.setMaxTile = function (maxTile) {
+  this.storage.setItem(this.maxTileKey, maxTile) || 2;
+};
+LocalStorageManager.prototype.getMaxTile = function () {
+   return this.storage.getItem(this.maxTileKey);
 };
