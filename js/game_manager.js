@@ -6,7 +6,11 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
   this.canUndo        = true;
   this.startTiles     = 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
   this.maxTile        = this.storageManager.getMaxTile();
+=======
+  this.canUndo        = true;
+>>>>>>> FETCH_HEAD
 =======
   this.canUndo        = true;
 >>>>>>> FETCH_HEAD
@@ -57,10 +61,15 @@ GameManager.prototype.save = function () {
 GameManager.prototype.undo = function () {
   if (this.undoCount > 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
     if (this.canUndo) {
     this.canUndo        = false;
 
     this.actuator.clearMessage();
+=======
+   if (this.canUndo) {
+    this.canUndo        = false;
+>>>>>>> FETCH_HEAD
 =======
    if (this.canUndo) {
     this.canUndo        = false;
