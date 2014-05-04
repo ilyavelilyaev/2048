@@ -562,7 +562,12 @@ hr {
 
 .game-intro {
   float: left;
-  line-height: 42px;
+  line-height: 20px;
+  margin-bottom: 0; }
+
+.br-style {
+  float: left;
+  line-height: 20px;
   margin-bottom: 0; }
 
 .restart-button {
@@ -572,7 +577,7 @@ hr {
 	text-decoration: none;
 	color: #f9f6f2;
 	height: 40px;
-	line-height: 42px;
+	line-height: 40px;
 	cursor: pointer;
 	display: block;
 	text-align: center;
@@ -610,7 +615,7 @@ hr {
   cursor: pointer;
   display: block;
   text-align: center;
-  float: right;
+  float: left;
   padding-bottom: 2px;
   padding-left: 20px;
   padding-right: 20px;
@@ -657,6 +662,11 @@ hr {
     box-sizing: border-box;
     line-height: 1.65; }
 
+  .br-style {
+    width: 55%;
+    display: block;
+    line-height: 1.6;
+  }
   .restart-button {
     width: 42%;
     padding: 0;
@@ -676,7 +686,7 @@ hr {
     padding: 0;
     display: block;
     box-sizing: border-box;
-    margin-top: 2px; }
+    margin-top: 10px; }
 
   .game-container {
     margin-top: 17px;
