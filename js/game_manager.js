@@ -78,7 +78,7 @@ GameManager.prototype.undo = function () {
     this.over        = previousState.over;
     this.won         = previousState.won;
     this.keepPlaying = previousState.keepPlaying;
-  
+    this.moves       = previousState.moves;
   this.score -= 2500;
   // Update the actuator
   this.actuate();
@@ -135,7 +135,8 @@ GameManager.prototype.setup = function () {
     this.over        = previousState.over;
     this.won         = previousState.won;
     this.keepPlaying = previousState.keepPlaying;
-  } else {
+    this.moves       = previousState.moves;
+    } else {
     this.grid        = new Grid(this.size);
     if (this.maxTile > 2) {
     this.score       = this.maxTile*(Math.log(this.maxTile)/Math.log(2)-1);
@@ -208,7 +209,8 @@ GameManager.prototype.serialize = function () {
     score:       this.score,
     over:        this.over,
     won:         this.won,
-    keepPlaying: this.keepPlaying
+    keepPlaying: this.keepPlaying,
+    moves:       this.moves
   };
 };
 
