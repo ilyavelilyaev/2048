@@ -191,7 +191,8 @@ GameManager.prototype.actuate = function () {
     won:        this.won,
     bestScore:  this.storageManager.getBestScore(),
     terminated: this.isGameTerminated(),
-    undoCount:  this.undoCount 
+    undoCount:  this.undoCount,
+    nextGoal:   this.maxTile*2
   });
 
 };

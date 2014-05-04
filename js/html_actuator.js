@@ -5,7 +5,7 @@ function HTMLActuator() {
   this.messageContainer = document.querySelector(".game-message");
   this.sharingContainer = document.querySelector(".score-sharing");
   this.undoContainer    = document.querySelector(".undo-button");
-
+  this.titleContainer   = document.querySelector(".title");
   this.score = 0;
 }
 
@@ -26,7 +26,8 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
     self.updateScore(metadata.score);
     self.updateBestScore(metadata.bestScore);
     self.updateUndo(metadata.undoCount);
-
+    self.updateTitle(metadata.nextGoal);
+    
     if (metadata.terminated) {
       if (metadata.over) {
         self.message(false); // You lose
@@ -129,6 +130,10 @@ HTMLActuator.prototype.updateScore = function (score) {
 
 HTMLActuator.prototype.updateBestScore = function (bestScore) {
   this.bestContainer.textContent = bestScore;
+};
+
+HTMLActuator.prototype.updateTitle= function (nextGoal) {
+  this.titleContainer.textContent = nextGoal;
 };
 
 HTMLActuator.prototype.updateUndo = function (undoCount) {
