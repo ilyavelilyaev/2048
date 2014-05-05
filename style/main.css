@@ -81,7 +81,12 @@ h1.title {
 .scores-container {
   float: right;
   text-align: right; }
+@media screen and (max-width: 520px) {
+.scores-container {
+  float: center;
+  text-align: center; }
 
+}
 .score-container, .best-container, .moves-container {
   position: relative;
   display: inline-block;
@@ -460,14 +465,14 @@ hr {
     font-size: 35px; }
     @media screen and (max-width: 520px) {
       .tile.tile-4096 .tile-inner {
-        font-size: 15. }}
+        font-size: 15px }}
   .tile.tile-super .tile-inner {
     color: #f9f6f2;
     background: #3c3a32;
     font-size: 30px; }
     @media screen and (max-width: 520px) {
       .tile.tile-super .tile-inner {
-        font-size: 10px; } }
+        font-size: 15px; } }
 
 @-webkit-keyframes appear {
   0% {
@@ -568,7 +573,7 @@ hr {
   animation-fill-mode: backwards; }
 
 .above-game:after {
-  content: "";
+  content: " ";
   display: block;
   clear: both; }
 
@@ -653,8 +658,10 @@ hr {
     padding: 0 20px; }
 
   h1.title {
-    font-size: 20px;
-    margin-top: 15px; }
+    font-size: 40px;
+    margin-top: 15px;
+    text-align: center;
+    float: center; }
 
   .container {
     width: 280px;

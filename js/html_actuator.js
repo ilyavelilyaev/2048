@@ -7,6 +7,7 @@ function HTMLActuator() {
   this.undoContainer    = document.querySelector(".undo-button");
   this.titleContainer   = document.querySelector(".title");
   this.movesContainer   = document.querySelector(".moves-container");
+  this.gameIntro        = document.querySelector(".game-intro");
   this.score = 0;
 }
 
@@ -140,15 +141,16 @@ HTMLActuator.prototype.updateMoves = function (moves) {
 
 HTMLActuator.prototype.updateTitle= function (nextGoal) {
   this.titleContainer.textContent = nextGoal;
+  
 };
 
 HTMLActuator.prototype.updateUndo = function (undoCount) {
-  this.undoContainer.textContent = "Отменить ход (" + undoCount + ")";
+  this.undoContainer.textContent = "Отменить (" + undoCount + ")";
 };
 
 HTMLActuator.prototype.message = function (won) {
   var type    = won ? "game-won" : "game-over";
-  var message = won ? "You win!" : "Game over!";
+  var message = won ? "Победа!" : "Конец!";
 
   if (typeof ga !== "undefined") {
     ga("send", "event", "game", "end", type, this.score);
