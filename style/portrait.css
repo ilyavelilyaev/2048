@@ -159,7 +159,7 @@ hr {
   margin-bottom: 30px; }
 
 .container {
-  width: 100%;
+  width: 700px;
   margin: 0 auto;
   height: 100%;
   overflow: hidden;}
@@ -202,7 +202,7 @@ hr {
     margin-top: 20%; } }
 .game-container {
   margin-top: 40px;
-  position: relative; left: 50%;
+  position: relative; left: 100px;
   float: center;
   padding: 15px;
   cursor: default;
