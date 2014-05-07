@@ -202,7 +202,7 @@ hr {
   100% {
     margin-top: 20%; } }
 .game-container {
-  margin-top: 40px;
+  margin-top: 0px;
   position: relative; left:200px;
   padding: 15px;
   cursor: default;
