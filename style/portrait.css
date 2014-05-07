@@ -160,7 +160,7 @@ hr {
   margin-bottom: 30px; }
 
 .container {
-  width: 700px;
+  width: 900px;
   margin: 0 auto;
   height: 100%;
   overflow: hidden;}
@@ -203,11 +203,9 @@ hr {
     margin-top: 20%; } }
 .game-container {
   margin-top: 40px;
-  position: relative; 
-  float: center;
+  position: relative; left:200px;
   padding: 15px;
   cursor: default;
-  text-align: center;
   -webkit-touch-callout: none;
   -ms-touch-callout: none;
   -webkit-user-select: none;
