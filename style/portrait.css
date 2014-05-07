@@ -82,6 +82,7 @@ h1.title {
     opacity: 0; } }
 .scores-container {
   float: center;
+
   text-align: center; }
 @media screen and (max-width: 520px) {
 .scores-container {
@@ -202,10 +203,11 @@ hr {
     margin-top: 20%; } }
 .game-container {
   margin-top: 40px;
-  position: relative; left: 100px;
+  position: relative; 
   float: center;
   padding: 15px;
   cursor: default;
+  text-align: center;
   -webkit-touch-callout: none;
   -ms-touch-callout: none;
   -webkit-user-select: none;
