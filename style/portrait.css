@@ -82,7 +82,7 @@ h1.title {
     opacity: 0; } }
 .scores-container {
   float: center;
-  text-align: right; }
+  text-align: center; }
 @media screen and (max-width: 520px) {
 .scores-container {
   float: center;
