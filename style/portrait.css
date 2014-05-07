@@ -203,6 +203,7 @@ hr {
 .game-container {
   margin-top: 40px;
   position: center;
+  float: center;
   padding: 15px;
   cursor: default;
   -webkit-touch-callout: none;
