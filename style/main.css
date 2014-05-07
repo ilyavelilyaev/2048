@@ -10,7 +10,7 @@ html, body {
   height: 100%;}
 
 body {
-  margin: 10px 0; }
+  margin: 0px 0; }
 
 input {
   display: inline-block;
@@ -161,7 +161,7 @@ hr {
 .container {
   width: 500px;
   margin: 0 auto;
-  height: 700px;
+  height: 100%;
   overflow: hidden;}
 
 @-webkit-keyframes fade-in {
