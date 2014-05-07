@@ -82,7 +82,8 @@ h1.title {
     opacity: 0; } }
 .scores-container {
   float: center;
-
+  position: relative; 
+  top: 20px;
   text-align: center; }
 @media screen and (max-width: 520px) {
 .scores-container {
@@ -578,7 +579,7 @@ hr {
   animation-fill-mode: backwards; }
 
 .above-game:after {
-  content: " ";
+  content: "";
   display: block;
   clear: both; }
 
@@ -619,8 +620,8 @@ hr {
   line-height: 42px;
   cursor: pointer;
   display: block;
-  text-align: center;
-  float: left;
+  text-align: right;
+  float: right;
   padding-bottom: 2px;
   padding-left: 20px;
   padding-right: 20px;
