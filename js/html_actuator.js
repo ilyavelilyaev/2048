@@ -25,7 +25,7 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
         }
       });
     });
-    if ((metadata.moves === 0) && !(metadata.score === 0) {
+    if ((metadata.moves === 0) && !(metadata.score === 0)) {
       this.restartButton.textContent = "Сброс Прогресса";
     } else {
       this.restartButton.textContent = "Начать заново";
