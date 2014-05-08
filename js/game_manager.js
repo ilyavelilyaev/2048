@@ -24,7 +24,7 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
 
 // Restart the game
 GameManager.prototype.restart = function () {
-if (this.moves = 0) {this.reset();} else {
+if (this.moves === 0) {this.reset();} else {
   this.canUndo        = false;
   this.maxTile        = this.storageManager.getMaxTile();
   this.storageManager.clearGameState();
