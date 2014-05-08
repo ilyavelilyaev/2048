@@ -8,6 +8,7 @@ function HTMLActuator() {
   this.titleContainer   = document.querySelector(".title");
   this.movesContainer   = document.querySelector(".moves-container");
   this.gameIntro        = document.querySelector(".game-intro");
+  this.restartButton    = document.querySelector(".restart-button");
   this.score = 0;
 }
 
@@ -24,7 +25,11 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
         }
       });
     });
-
+    if ((metadata.moves === 0) && !(metadata.score === 0) {
+      this.restartButton.textContent = "Сброс Прогресса";
+    } else {
+      this.restartButton.textContent = "Начать заново";
+    }
     self.updateScore(metadata.score);
     self.updateBestScore(metadata.bestScore);
     self.updateUndo(metadata.undoCount);
