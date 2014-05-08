@@ -140,7 +140,7 @@ GameManager.prototype.setup = function () {
     } else {
     this.grid        = new Grid(this.size);
     if (this.maxTile > 2) {
-    this.score       = this.maxTile*(Math.log(this.maxTile)/Math.log(2)-1) - this.maxTile*0.2;
+    this.score       = this.maxTile*(Math.log(this.maxTile)/Math.log(2)-1) - Math.round(this.maxTile*0.2);
   } else this.score = 0;
     this.moves          = 0;
     this.over        = false;
