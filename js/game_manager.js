@@ -24,6 +24,7 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
 
 // Restart the game
 GameManager.prototype.restart = function () {
+if (this.moves = 0) {this.reset();} else {
   this.canUndo        = false;
   this.maxTile        = this.storageManager.getMaxTile();
   this.storageManager.clearGameState();
@@ -31,7 +32,7 @@ GameManager.prototype.restart = function () {
   this.canUndo        = false;
   this.actuator.continueGame(); // Clear the game won/lost message
   this.setup();
-  
+  }
 };
 
 GameManager.prototype.reset = function () {
